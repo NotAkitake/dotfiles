@@ -1,0 +1,15 @@
+[user]
+	email = akitake@pm.me
+	name = Akitake
+	signinkey = /home/akitake/.ssh/id_ed25519
+	signingkey = /home/akitake/.ssh/id_ed25519
+[commit]
+	gpgsign = true
+[credential]
+	helper = cache
+[tag]
+	gpgSign = true
+[gpg]
+	format = ssh
+[init]
+	defaultBranch = main
