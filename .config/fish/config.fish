@@ -8,6 +8,10 @@ if test -f ~/.config/fish/private_env.fish
     source ~/.config/fish/private_env.fish
 end
 
+# Custom variables
+set -Ux EDITOR nvim
+set -Ux VISUAL nvim
+
 # Custom aliases
 alias vim=nvim
 alias q=exit
@@ -21,6 +25,11 @@ if status --is-interactive
     abbr --add vimcfg 'vim ~/.config/nvim/'
 end
 
-# Overwrite greeting, disabling fastfetch
+# Override 'edit' to always use nvim
+function edit
+    nvim $argv
+end
+
+# Override greeting to disabling fastfetch
 function fish_greeting
 end
