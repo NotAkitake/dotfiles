@@ -107,6 +107,8 @@ spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 spawn-at-startup "dms" "run"
 spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 spawn-at-startup "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
+// YuanCon watcher for focus toggle behavior
+spawn-at-startup "/home/akitake/.scripts/toggle-yuancon.sh"
 environment {
     XDG_CURRENT_DESKTOP "niri"
     QT_QPA_PLATFORM "wayland"
@@ -158,7 +160,7 @@ workspace "web"
 workspace "chat"
 // Workspace Rules
 window-rule {
-    match app-id="^kitty$"
+    match title="kitty"
     open-on-workspace "term"
 }
 window-rule {
@@ -255,6 +257,9 @@ binds {
     // === Application Launchers ===
     Mod+B hotkey-overlay-title="Open Zen Browser" {
         spawn "zen-browser"
+    }
+    Mod+C hotkey-overlay-title="Open Neovim" {
+        spawn "kitty" "nvim"
     }
     Mod+E hotkey-overlay-title="Open Nautilus" {
         spawn "nautilus"
@@ -604,7 +609,7 @@ binds {
     Mod+Ctrl+F {
         expand-column-to-available-width
     }
-    Mod+C {
+    Mod+Shift+C {
         center-column
     }
     Mod+Ctrl+C {
@@ -650,7 +655,7 @@ binds {
         power-off-monitors
     }
     Mod+Ctrl+E {
-        spawn "bash" "-c" "/home/akitake/.dotfiles/toggle-ethernet.sh"
+        spawn "bash" "-c" "/home/akitake/.dotfiles/.scripts/toggle-ethernet.sh"
     }
 }
 debug {
