@@ -1,116 +1,129 @@
 #!/bin/bash
+set -euo pipefail
 
-DEVICE_NAME="YuanCon"
-LPEAK_BUTTON_CODE="BTN_BASE5"
-RPEAK_BUTTON_CODE="BTN_BASE6"
-MODE="hold" # "toggle" or "hold"
+# Configuration
+readonly DEVICE_NAME="YuanCon"
+readonly LPEAK_BUTTON_CODE="BTN_BASE5"
+readonly RPEAK_BUTTON_CODE="BTN_BASE6"
+readonly MODE="hold" # "toggle" or "hold"
 
-# Button states, initializing to 0 to avoid string issues
-TOGGLE_STATE_R=0
-TOGGLE_STATE_L=0
-BUTTON_HELD_R=0
-BUTTON_HELD_L=0
-BUTTON_PRESSED_R=0
-BUTTON_PRESSED_L=0
+# State variables
+toggle_r=0
+toggle_l=0
+held_r=0
+held_l=0
+pressed_r=0
+pressed_l=0
 
 find_device() {
   local dev
-  dev=$(ls /dev/input/by-id/ 2>/dev/null | grep "$DEVICE_NAME" | grep -E "event" | head -n1)
-  if [ -n "$dev" ]; then
-    echo "/dev/input/by-id/$dev"
-  else
-    echo ""
-  fi
+  dev=$(find /dev/input/by-id/ -name "*${DEVICE_NAME}*event*" -print -quit 2>/dev/null)
+  echo "$dev"
+}
+
+toggle_mic() {
+  dms ipc audio micmute
 }
 
 handle_button_press() {
-  local button_state_var="$1"  # Directly pass variable names
-  local toggle_state_var="$2"  # Directly pass variable names
-  local focus_direction="$3"
+  local button="$1"
+  local focus_dir="$2"
+  local opposite_dir="$3"
+  local toggle_var="toggle_${button}"
+  local held_var="held_${button}"
 
-  dms ipc audio micmute
+  toggle_mic
 
   if [ "$MODE" = "toggle" ]; then
-    if [ "${!toggle_state_var}" -eq 0 ]; then
-      niri msg action "$focus_direction"
-      eval "$toggle_state_var=1"
+    if [ "${!toggle_var}" -eq 0 ]; then
+      niri msg action "$focus_dir"
+      eval "${toggle_var}=1"
     else
-      niri msg action focus-column-left
-      eval "$toggle_state_var=0"
+      niri msg action "$opposite_dir"
+      eval "${toggle_var}=0"
     fi
-    sleep 0.2 # debounce
-  elif [ "$MODE" = "hold" ] && [ "${!button_state_var}" -eq 0 ]; then
-    niri msg action "$focus_direction"
-    eval "$button_state_var=1"
+    sleep 0.2
+  elif [ "$MODE" = "hold" ] && [ "${!held_var}" -eq 0 ]; then
+    niri msg action "$focus_dir"
+    eval "${held_var}=1"
   fi
 }
 
 handle_button_release() {
-  local button_state_var="$1"
-  local focus_direction="$2"
+  local button="$1"
+  local focus_dir="$2"
+  local held_var="held_${button}"
 
-  dms ipc audio micmute
+  toggle_mic
 
-  if [ "$MODE" = "hold" ] && [ "${!button_state_var}" -eq 1 ]; then
-    niri msg action "$focus_direction"
-    eval "$button_state_var=0"
+  if [ "$MODE" = "hold" ] && [ "${!held_var}" -eq 1 ]; then
+    niri msg action "$focus_dir"
+    eval "${held_var}=0"
   fi
 }
 
-echo "Starting YuanCon listener..."
-while true; do
-  DEVICE=$(find_device)
+reset_state() {
+  toggle_r=0
+  toggle_l=0
+  held_r=0
+  held_l=0
+  pressed_r=0
+  pressed_l=0
+}
 
-  if [ -n "$DEVICE" ]; then
-    echo "Device found: $DEVICE"
+process_event() {
+  local line="$1"
 
-    evtest "$DEVICE" | while read -r line; do
+  # Right button press
+  if echo "$line" | grep -q "${RPEAK_BUTTON_CODE}.*value 1"; then
+    if [ "$pressed_l" -eq 0 ] && [ "$pressed_r" -eq 0 ]; then
+      pressed_r=1
+      handle_button_press "r" "focus-column-right" "focus-column-left"
+    fi
 
-      # Right peak button press
-      if echo "$line" | grep -q "$RPEAK_BUTTON_CODE.*value 1"; then
-        if [ "$BUTTON_PRESSED_L" -eq 0 ]; then # prevent left button from being pressed simultaneously
-          if [ "$BUTTON_PRESSED_R" -eq 0 ]; then
-            BUTTON_PRESSED_R=1
-            handle_button_press BUTTON_HELD_R TOGGLE_STATE_R "focus-column-right"
-          fi
-        fi
+  # Left button press
+  elif echo "$line" | grep -q "${LPEAK_BUTTON_CODE}.*value 1"; then
+    if [ "$pressed_r" -eq 0 ] && [ "$pressed_l" -eq 0 ]; then
+      pressed_l=1
+      handle_button_press "l" "focus-column-left" "focus-column-right"
+    fi
 
-      # Left peak button press
-      elif echo "$line" | grep -q "$LPEAK_BUTTON_CODE.*value 1"; then
-        if [ "$BUTTON_PRESSED_R" -eq 0 ]; then # prevent right button from being pressed simultaneously
-          if [ "$BUTTON_PRESSED_L" -eq 0 ]; then
-            BUTTON_PRESSED_L=1
-            handle_button_press BUTTON_HELD_L TOGGLE_STATE_L "focus-column-left"
-          fi
-        fi
+  # Right button release
+  elif echo "$line" | grep -q "${RPEAK_BUTTON_CODE}.*value 0"; then
+    if [ "$pressed_r" -eq 1 ]; then
+      pressed_r=0
+      handle_button_release "r" "focus-column-left"
+    fi
 
-      # Right peak button release
-      elif echo "$line" | grep -q "$RPEAK_BUTTON_CODE.*value 0"; then
-        if [ "$BUTTON_PRESSED_R" -eq 1 ]; then
-          BUTTON_PRESSED_R=0
-          handle_button_release BUTTON_HELD_R "focus-column-left"
-        fi
-
-      # Left peak button release
-      elif echo "$line" | grep -q "$LPEAK_BUTTON_CODE.*value 0"; then
-        if [ "$BUTTON_PRESSED_L" -eq 1 ]; then
-          BUTTON_PRESSED_L=0
-          handle_button_release BUTTON_HELD_L "focus-column-right"
-        fi
-      fi
-
-    done
-
-    echo "Device disconnected, waiting for it to be re-plugged..."
-    TOGGLE_STATE_R=0
-    TOGGLE_STATE_L=0
-    BUTTON_HELD_R=0
-    BUTTON_HELD_L=0
-    BUTTON_PRESSED_R=0
-    BUTTON_PRESSED_L=0
-
-  else
-    sleep 1
+  # Left button release
+  elif echo "$line" | grep -q "${LPEAK_BUTTON_CODE}.*value 0"; then
+    if [ "$pressed_l" -eq 1 ]; then
+      pressed_l=0
+      handle_button_release "l" "focus-column-right"
+    fi
   fi
-done
+}
 
+main() {
+  echo "Starting YuanCon listener..."
+
+  while true; do
+    local device
+    device=$(find_device)
+
+    if [ -n "$device" ]; then
+      echo "Device found: $device"
+
+      evtest "$device" 2>/dev/null | while IFS= read -r line; do
+        process_event "$line"
+      done || true
+
+      echo "Device disconnected, waiting for reconnection..."
+      reset_state
+    else
+      sleep 1
+    fi
+  done
+}
+
+main
