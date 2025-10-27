@@ -13,6 +13,7 @@ set -Ux EDITOR nvim
 set -Ux VISUAL nvim
 set -Ux TERM kitty
 set -Ux TERMINAL kitty
+set -x PATH ~/.cargo/bin $PATH
 
 # Custom aliases
 alias vim=nvim
