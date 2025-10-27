@@ -1,0 +1,24 @@
+{
+  "wallpaperDiscovery": {
+    "enabled": false,
+    "api_unsplash": "T4rmWqecSXKrHPa5JuyHO_cZXnDoh6k_nkoG1LTenrc"
+  },
+  "dankActions": {
+    "enabled": true,
+    "variants": [
+      {
+        "icon": "lan",
+        "displayText": "",
+        "displayCommand": "",
+        "clickCommand": "/home/akitake/.scripts/toggle-ethernet.sh",
+        "middleClickCommand": "",
+        "rightClickCommand": "",
+        "updateInterval": 0,
+        "showIcon": true,
+        "showText": true,
+        "id": "variant_1761566599388",
+        "name": "Ethernet Toggle"
+      }
+    ]
+  }
+}
