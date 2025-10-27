@@ -11,6 +11,8 @@ end
 # Custom variables
 set -Ux EDITOR nvim
 set -Ux VISUAL nvim
+set -Ux TERM kitty
+set -Ux TERMINAL kitty
 
 # Custom aliases
 alias vim=nvim
@@ -23,6 +25,7 @@ if status --is-interactive
     abbr --add fishcfg 'vim ~/.config/fish/config.fish'
     abbr --add termcfg 'vim ~/.config/kitty/kitty.conf'
     abbr --add vimcfg 'vim ~/.config/nvim/'
+    abbr --add niricfg 'vim ~/.config/niri/config.kdl'
 end
 
 # Override 'edit' to always use nvim
