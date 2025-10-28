@@ -18,6 +18,7 @@ set -x PATH ~/.cargo/bin $PATH
 # Custom aliases
 alias vim=nvim
 alias q=exit
+alias fastfetch="fastfetch -c arch"
 
 # Custom abbreviations
 if status --is-interactive
@@ -34,6 +35,6 @@ function edit
     nvim $argv
 end
 
-# Override greeting to disabling fastfetch
-function fish_greeting
-end
+# Disable greeter
+#function fish_greeting
+#end
