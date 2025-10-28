@@ -94,9 +94,17 @@ layout {
 
     }
 }
+//layer-rule {
+//    match namespace="^quickshell$"
+//    place-within-backdrop true
 layer-rule {
-    match namespace="^quickshell$"
+    match namespace="dms:blurwallpaper"
+    opacity 0.0
+}
+layer-rule {
+    match namespace="dms:blurwallpaper"
     place-within-backdrop true
+    opacity 1.0
 }
 overview {
     workspace-shadow {
