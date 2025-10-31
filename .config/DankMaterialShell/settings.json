@@ -1,5 +1,5 @@
 {
-  "currentThemeName": "cat-mauve",
+  "currentThemeName": "dynamic",
   "customThemeFile": "",
   "matugenScheme": "scheme-tonal-spot",
   "runUserMatugenTemplates": true,
@@ -89,11 +89,8 @@
   "showWorkspaceApps": false,
   "maxWorkspaceIcons": 3,
   "workspacesPerMonitor": true,
+  "dwlShowAllTags": false,
   "workspaceNameIcons": {
-    "term": {
-      "type": "icon",
-      "value": "terminal"
-    },
     "web": {
       "type": "icon",
       "value": "wifi"
@@ -114,20 +111,34 @@
   "lockDateFormat": "",
   "mediaSize": 2,
   "dankBarLeftWidgets": [
-    "launcherButton",
-    "workspaceSwitcher",
     {
-      "id": "music",
+      "id": "launcherButton",
       "enabled": true
-    }
-  ],
-  "dankBarCenterWidgets": [
+    },
+    {
+      "id": "workspaceSwitcher",
+      "enabled": true
+    },
     {
       "id": "focusedWindow",
       "enabled": true
     }
   ],
+  "dankBarCenterWidgets": [
+    {
+      "id": "clock",
+      "enabled": true
+    },
+    {
+      "id": "weather",
+      "enabled": true
+    }
+  ],
   "dankBarRightWidgets": [
+    {
+      "id": "music",
+      "enabled": true
+    },
     {
       "id": "systemTray",
       "enabled": true
@@ -155,20 +166,13 @@
     {
       "id": "notificationButton",
       "enabled": true
-    },
-    {
-      "id": "weather",
-      "enabled": true
-    },
-    {
-      "id": "clock",
-      "enabled": true
     }
   ],
   "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
   "sortAppsAlphabetically": false,
   "networkPreference": "wifi",
+  "vpnLastConnected": "",
   "iconTheme": "System Default",
   "launcherLogoMode": "os",
   "launcherLogoCustomPath": "/home/akitake/Pictures/Avatars/Aki/AkiEditor-PlayGlow@1024.png",
@@ -176,7 +180,7 @@
   "launcherLogoColorInvertOnMode": false,
   "launcherLogoBrightness": 0.5,
   "launcherLogoContrast": 1,
-  "launcherLogoSizeOffset": 0,
+  "launcherLogoSizeOffset": 6,
   "fontFamily": "Cantarell",
   "monoFontFamily": "Hack",
   "fontWeight": 400,
@@ -196,18 +200,18 @@
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
-  "showDock": false,
-  "dockAutoHide": false,
+  "showDock": true,
+  "dockAutoHide": true,
   "dockGroupByApp": false,
   "dockOpenOnOverview": false,
-  "dockPosition": 0,
+  "dockPosition": 2,
   "dockSpacing": 4,
   "dockBottomGap": 0,
   "dockIconSize": 40,
   "dockIndicatorStyle": "circle",
   "cornerRadius": 12,
   "notificationOverlayEnabled": false,
-  "dankBarAutoHide": false,
+  "dankBarAutoHide": true,
   "dankBarOpenOnOverview": false,
   "dankBarVisible": true,
   "dankBarSpacing": 4,
@@ -231,12 +235,12 @@
   "surfaceBase": "s",
   "wallpaperFillMode": "Fill",
   "blurredWallpaperLayer": true,
-  "blurWallpaperOnOverview": false,
+  "blurWallpaperOnOverview": true,
   "notificationTimeoutLow": 5000,
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
   "notificationPopupPosition": 0,
-  "osdAlwaysShowValue": false,
+  "osdAlwaysShowValue": true,
   "powerActionConfirm": true,
   "customPowerActionLock": "",
   "customPowerActionLogout": "",
@@ -250,7 +254,7 @@
   "screenPreferences": {},
   "showOnLastDisplay": {},
   "animationSpeed": 1,
-  "customAnimationDuration": 500,
+  "customAnimationDuration": 250,
   "acMonitorTimeout": 0,
   "acLockTimeout": 0,
   "acSuspendTimeout": 0,
