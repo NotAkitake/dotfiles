@@ -1,8 +1,4 @@
 {
-  "wallpaperDiscovery": {
-    "enabled": false,
-    "api_unsplash": "T4rmWqecSXKrHPa5JuyHO_cZXnDoh6k_nkoG1LTenrc"
-  },
   "dankActions": {
     "enabled": true,
     "variants": [
