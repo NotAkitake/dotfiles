@@ -171,10 +171,6 @@ workspace "web"
 workspace "chat"
 // Workspace Rules
 window-rule {
-    match title="kitty"
-    open-on-workspace "term"
-}
-window-rule {
     match app-id="zen"
     open-on-workspace "web"
     default-column-width {
