@@ -224,6 +224,7 @@ window-rule {
     match app-id="^galculator$"
     match app-id="^blueman-manager$"
     match app-id="^org\\.gnome\\.Nautilus$"
+    match app-id="^org\\.kde\\.dolphin$"
     match app-id="^steam$"
     match app-id="^xdg-desktop-portal$"
     match app-id="^org\\.prismlauncher\\.PrismLauncher$"
@@ -269,8 +270,8 @@ binds {
     Mod+C hotkey-overlay-title="Open Neovim" {
         spawn "kitty" "nvim"
     }
-    Mod+E hotkey-overlay-title="Open Nautilus" {
-        spawn "nautilus"
+    Mod+E hotkey-overlay-title="Open Dolphin" {
+        spawn "dolphin"
     }
     Mod+Shift+E hotkey-overlay-title="Open Yazi" {
         spawn "kitty" "yazi"
