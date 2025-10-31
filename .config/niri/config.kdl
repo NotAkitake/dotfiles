@@ -74,14 +74,14 @@ layout {
     // `draw-border-with-background`.
     border {
         off
-        width 4
-        active-color "#c6a0f6"
+        width 1
+        active-color "#ffffff"
         inactive-color "#d0d0d0"
         urgent-color "#cc4444"
     }
     focus-ring {
         width 2
-        active-color "#c6a0f6"
+        active-color "#000000"
         inactive-color "#505050"
     }
     shadow {
