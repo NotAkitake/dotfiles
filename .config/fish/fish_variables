@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
+SETUVAR --export KDE_TERMINAL:kitty
 SETUVAR --export TERM:kitty
 SETUVAR --export TERMINAL:kitty
 SETUVAR --export VISUAL:nvim

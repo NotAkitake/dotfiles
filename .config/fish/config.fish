@@ -13,6 +13,7 @@ set -Ux EDITOR nvim
 set -Ux VISUAL nvim
 set -Ux TERM kitty
 set -Ux TERMINAL kitty
+set -Ux KDE_TERMINAL kitty
 set -x PATH ~/.cargo/bin $PATH
 
 # Custom aliases
@@ -28,7 +29,8 @@ if status --is-interactive
     abbr --add termcfg 'vim ~/.config/kitty/kitty.conf'
     abbr --add vimcfg 'vim ~/.config/nvim/'
     abbr --add niricfg 'vim ~/.config/niri/config.kdl'
-    abbr --add rcnc 'rclone copy /mnt/HDD/Cloud/ nc:/'
+    abbr --add rcnc 'rclone copy /mnt/HDD/Cloud/ nc:/ --progress'
+    abbr --add rcnas 'rclone copy /mnt/HDD/ nas:/ --exclude "SteamLibrary/**" --progress'
 end
 
 # Override 'edit' to always use nvim
