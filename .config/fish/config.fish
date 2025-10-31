@@ -28,6 +28,7 @@ if status --is-interactive
     abbr --add termcfg 'vim ~/.config/kitty/kitty.conf'
     abbr --add vimcfg 'vim ~/.config/nvim/'
     abbr --add niricfg 'vim ~/.config/niri/config.kdl'
+    abbr --add rcnc 'rclone copy /mnt/HDD/Cloud/ nc:/'
 end
 
 # Override 'edit' to always use nvim
