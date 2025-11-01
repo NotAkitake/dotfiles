@@ -38,8 +38,9 @@ function edit
 end
 
 # rclone: Nextcloud
-function rcnc
+function syncnc
     for d in Documents Music Pictures
+        echo - Syncing $d...
         rclone sync /mnt/HDD/Cloud/$d nc:/$d $argv --progress
     end
 end
