@@ -29,13 +29,19 @@ if status --is-interactive
     abbr --add termcfg 'vim ~/.config/kitty/kitty.conf'
     abbr --add vimcfg 'vim ~/.config/nvim/'
     abbr --add niricfg 'vim ~/.config/niri/config.kdl'
-    abbr --add rcnc 'rclone copy /mnt/HDD/Cloud/ nc:/ --progress'
-    abbr --add rcnas 'rclone copy /mnt/HDD/ nas:/ --exclude "SteamLibrary/**" --progress'
+    abbr --add syncnas '~/.scripts/syncnas.sh'
 end
 
 # Override 'edit' to always use nvim
 function edit
     nvim $argv
+end
+
+# rclone: Nextcloud
+function rcnc
+    for d in Documents Music Pictures
+        rclone sync /mnt/HDD/Cloud/$d nc:/$d $argv --progress
+    end
 end
 
 # Disable greeter
