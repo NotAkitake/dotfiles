@@ -16,5 +16,18 @@
         "name": "Ethernet Toggle"
       }
     ]
+  },
+  "commandRunner": {
+    "enabled": true,
+    "history": [
+      "dgop"
+    ]
+  },
+  "calculator": {
+    "enabled": true,
+    "trigger": "="
+  },
+  "gitmojiLauncher": {
+    "enabled": true
   }
 }
