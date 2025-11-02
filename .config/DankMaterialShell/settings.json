@@ -38,11 +38,6 @@
   "controlCenterShowAudioIcon": true,
   "controlCenterWidgets": [
     {
-      "id": "volumeSlider",
-      "enabled": true,
-      "width": 100
-    },
-    {
       "id": "wifi",
       "enabled": true,
       "width": 50
