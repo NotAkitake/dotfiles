@@ -42,6 +42,7 @@ input {
 //  https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // -------------------------------------------------------------
 output "DP-3" {
+//mode "2560x1440@119.998"
   mode "2560x1440@164.835"
   scale 1
 }
@@ -322,10 +323,10 @@ binds {
 
   // SECURITY & SESSION
   Mod+Alt+L hotkey-overlay-title="Lock Screen" {
-    spawn "dms ipc call lock lock"
+    spawn-sh "dms ipc call lock lock"
   }
   Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" {
-    spawn "dms ipc call processlist toggle"
+    spawn-sh "dms ipc call processlist toggle"
   }
 
   // AUDIO & BRIGHTNESS
