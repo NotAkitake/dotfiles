@@ -39,9 +39,15 @@ end
 
 # rclone: Nextcloud
 function syncnc
+    # UP
     for d in Documents Music Pictures
-        echo - Syncing $d...
+        echo - Uploading: $d...
         rclone sync /mnt/HDD/Cloud/$d nc:/$d $argv --progress
+    end
+    # DOWN
+    for d in Recipes
+        echo - Downloading: $d...
+        rclone sync nc:/$d /mnt/HDD/Cloud/$d $argv --progress
     end
 end
 
