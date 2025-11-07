@@ -17,7 +17,7 @@ pressed_l=0
 
 find_device() {
   local dev
-  dev=$(find /dev/input/by-id/ -name "*${DEVICE_NAME}*event*" -print -quit 2>/dev/null)
+  dev=$(find /dev/input/by-id/ -name "*${DEVICE_NAME}*event-joystick*" -print -quit 2>/dev/null)
   echo "$dev"
 }
 
