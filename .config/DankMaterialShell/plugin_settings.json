@@ -20,6 +20,9 @@
   "commandRunner": {
     "enabled": true,
     "history": [
+      "reboot",
+      "sudo reboot",
+      "dms restart",
       "dgop"
     ]
   },
@@ -29,5 +32,11 @@
   },
   "gitmojiLauncher": {
     "enabled": true
+  },
+  "dankHooks": {
+    "enabled": false
+  },
+  "dankPomodoroTimer": {
+    "enabled": false
   }
 }
