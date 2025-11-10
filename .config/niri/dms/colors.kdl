@@ -1,25 +1,29 @@
 layout {
-  background-color "transparent"
-  focus-ring {
-    active-color "#fdb975"
-    inactive-color "#9d8e81"
-    urgent-color "#ffb4ab"
-  }
-  border {
-    active-color "#fdb975"
-    inactive-color "#9d8e81"
-    urgent-color "#ffb4ab"
-  }
-  shadow {
-    color "#00000070"
-  }
-  tab-indicator {
-    active-color "#fdb975"
-    inactive-color "#9d8e81"
-    urgent-color "#ffb4ab"
-  }
-  insert-hint {
-    color "#fdb97580"
-  }
-}
+    background-color "transparent"
 
+    focus-ring {
+        active-color   "#feb0d2"
+        inactive-color "#9d8d92"
+        urgent-color   "#ffb4ab"
+    }
+
+    border {
+        active-color   "#feb0d2"
+        inactive-color "#9d8d92"
+        urgent-color   "#ffb4ab"
+    }
+
+    shadow {
+        color "#00000070"
+    }
+
+    tab-indicator {
+        active-color   "#feb0d2"
+        inactive-color "#9d8d92"
+        urgent-color   "#ffb4ab"
+    }
+
+    insert-hint {
+        color "#feb0d280"
+    }
+}
