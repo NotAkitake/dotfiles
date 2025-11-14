@@ -1,28 +1,31 @@
-# CachyOS fish config
+### CachyOS config
 if test -f /usr/share/cachyos-fish-config/cachyos-config.fish
     source /usr/share/cachyos-fish-config/cachyos-config.fish
 end
 
-# Private environment variables
+### Private environment variables
 if test -f ~/.config/fish/private_env.fish
     source ~/.config/fish/private_env.fish
 end
 
-# Custom variables
-set -Ux EDITOR helix
-set -Ux VISUAL helix
-set -Ux TERM kitty
-set -Ux TERMINAL kitty
-set -Ux KDE_TERMINAL kitty
-set -x PATH ~/.cargo/bin $PATH
+### Environment variables
+set -gx EDITOR helix
+set -gx VISUAL helix
+set -gx SUDO_EDITOR helix
+set -gx TERM kitty
+set -gx TERMINAL kitty
+set -gx KDE_TERMINAL kitty
 
-# Custom aliases
-alias hx=helix
-alias vim=nvim
-alias q=exit
+### Paths
+fish_add_path ~/.cargo/bin
+
+### Aliases
+alias hx="helix"
+alias vim="nvim"
+alias q="exit"
 alias fastfetch="fastfetch -c arch"
 
-# Custom abbreviations
+### Abbreviations
 if status --is-interactive
     abbr --add grubup 'sudo grub-mkconfig -o /boot/grub/grub.cfg'
     abbr --add sshxyz 'ssh -i $XYZ_SSH_KEY $XYZ_SSH_USER@$XYZ_SSH_HOST'
@@ -34,25 +37,25 @@ if status --is-interactive
     abbr --add syncnas '~/.scripts/syncnas.sh'
 end
 
-# Override 'edit' to always use helix
+### Override `edit` to always use helix
 function edit
-    hx $argv
+    helix $argv
 end
 
-# rclone: Nextcloud
+### rclone: Nextcloud sync helper
 function syncnc
-    # UP
+    # Upload
     for d in Documents Music Pictures
-        echo - Uploading: $d...
+        echo "- Uploading: $d..."
         rclone sync /mnt/HDD/Cloud/$d nc:/$d $argv --progress
     end
-    # DOWN
+
+    # Download
     for d in Recipes
-        echo - Downloading: $d...
+        echo "- Downloading: $d..."
         rclone sync nc:/$d /mnt/HDD/Cloud/$d $argv --progress
     end
 end
 
-# Disable greeter
-#function fish_greeting
-#end
+# Optional: disable fish greeting
+# function fish_greeting; end

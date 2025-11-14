@@ -2,6 +2,7 @@
 # VERSION: 3.0
 SETUVAR --export EDITOR:helix
 SETUVAR --export KDE_TERMINAL:kitty
+SETUVAR --export SUDO_EDITOR:helix
 SETUVAR --export TERM:kitty
 SETUVAR --export TERMINAL:kitty
 SETUVAR --export VISUAL:helix
@@ -44,7 +45,7 @@ SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/akitake/\x2elocal/bin
+SETUVAR fish_user_paths:/home/akitake/\x2ecargo/bin\x1e/home/akitake/\x2elocal/bin
 SETUVAR pure_begin_prompt_with_current_directory:true
 SETUVAR pure_check_for_new_release:false
 SETUVAR pure_color_at_sign:pure_color_mute
