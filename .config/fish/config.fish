@@ -9,14 +9,15 @@ if test -f ~/.config/fish/private_env.fish
 end
 
 # Custom variables
-set -Ux EDITOR nvim
-set -Ux VISUAL nvim
+set -Ux EDITOR helix
+set -Ux VISUAL helix
 set -Ux TERM kitty
 set -Ux TERMINAL kitty
 set -Ux KDE_TERMINAL kitty
 set -x PATH ~/.cargo/bin $PATH
 
 # Custom aliases
+alias hx=helix
 alias vim=nvim
 alias q=exit
 alias fastfetch="fastfetch -c arch"
@@ -25,16 +26,17 @@ alias fastfetch="fastfetch -c arch"
 if status --is-interactive
     abbr --add grubup 'sudo grub-mkconfig -o /boot/grub/grub.cfg'
     abbr --add sshxyz 'ssh -i $XYZ_SSH_KEY $XYZ_SSH_USER@$XYZ_SSH_HOST'
-    abbr --add fishcfg 'vim ~/.config/fish/config.fish'
-    abbr --add termcfg 'vim ~/.config/kitty/kitty.conf'
-    abbr --add vimcfg 'vim ~/.config/nvim/'
-    abbr --add niricfg 'vim ~/.config/niri/config.kdl'
+    abbr --add fishcfg 'edit ~/.config/fish/config.fish'
+    abbr --add termcfg 'edit ~/.config/kitty/kitty.conf'
+    abbr --add hxcfg 'edit ~/.config/helix/config.toml'
+    abbr --add vimcfg 'edit ~/.config/nvim/'
+    abbr --add niricfg 'edit ~/.config/niri/config.kdl'
     abbr --add syncnas '~/.scripts/syncnas.sh'
 end
 
-# Override 'edit' to always use nvim
+# Override 'edit' to always use helix
 function edit
-    nvim $argv
+    hx $argv
 end
 
 # rclone: Nextcloud
